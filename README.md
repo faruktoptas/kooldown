@@ -1,4 +1,4 @@
-# kooldown
+# kooldown [![Status](https://travis-ci.org/faruktoptas/monitto.svg?branch=master)](https://travis-ci.org/faruktoptas/monitto)
 Circular progress animation with duration
 
 ![!gif](https://user-images.githubusercontent.com/1595227/49186009-628d8d80-f374-11e8-8e71-2f4aff10080a.gif)
