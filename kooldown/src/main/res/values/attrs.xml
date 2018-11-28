@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Kooldown">
+        <attr name="kd_inactiveColor" format="color"/>
+        <attr name="kd_activeColor" format="color"/>
+        <attr name="kd_strokeWidth" format="float"/>
+        <attr name="kd_max_angle" format="integer"/>
+        <attr name="kd_duration" format="integer"/>
+        <attr name="kd_startAngle" format="float"/>
+    </declare-styleable>
+</resources>
