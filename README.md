@@ -2,28 +2,7 @@
 
 Circular progress animation with duration
 
-![!gif](https://user-images.githubusercontent.com/1595227/49186009-628d8d80-f374-11e8-8e71-2f4aff10080a.gif)
-
-# Usage
-
-Add this in your root `build.gradle` file (**not** your module `build.gradle` file):
-
-```gradle
-allprojects {
-	repositories {
-		...
-		maven { url "https://jitpack.io" }
-	}
-}
-```
-
-Then, add the library to your module `build.gradle` under dependencies
-```gradle
-implementation 'com.github.faruktoptas:kooldown:1.0.0', {
-    exclude group: 'com.android.support'
-}
-```
-
+![!gif](https://user-images.githubusercontent.com/1595227/54090969-4c3b9880-438b-11e9-9697-e7ef9d81dbbe.gif)
 
 
 ```xml
@@ -34,8 +13,9 @@ implementation 'com.github.faruktoptas:kooldown:1.0.0', {
 		                     app:kd_duration="2000"
 		                     app:kd_inactiveColor="#dedede"
 		                     app:kd_startAngle="90"
-		                     app:kd_max_angle="360"
-		                     app:kd_strokeWidth="12"
+		                     app:kd_autoStart="true"
+		                     app:kd_progress="270"
+		                     app:kd_strokeWidth="20"
 		                     android:layout_height="200dp"/>
 ```
 
@@ -45,7 +25,8 @@ implementation 'com.github.faruktoptas:kooldown:1.0.0', {
  * `kd_inactiveColor`: Inactive color of circle
  * `kd_strokeWidth`: Stroke width of circle
  * `kd_startAngle`: Start point of animation (Does not effect duration or speed)
- * `kd_max_angle`: Max angle of animation. Default value is 360 for a complete circle
+ * `kd_progress`: Max angle of animation. Default value is 360 for a complete circle
+ * `kd_autoStart`: Automatically starts animation
 
 # License
 [Apache License 2.0](https://github.com/faruktoptas/kooldown/blob/master/LICENSE)

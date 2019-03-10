@@ -2,7 +2,30 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group='com.github.faruktoptas'
+ext {
+
+    bintrayRepo = "kooldown"
+    bintrayName = "kooldown"
+
+    publishedGroupId = 'me.toptas.kooldown'
+    libraryName = 'kooldown'
+    artifact = 'kooldown'
+
+    libraryVersion = '0.1'
+
+    libraryDescription = 'Circular progress animation with duration'
+
+    siteUrl = 'https://github.com/faruktoptas/kooldown'
+    gitUrl = 'https://github.com/faruktoptas/kooldown'
+
+    developerId = 'faruktoptas'
+    developerName = 'Faruk Toptas'
+    developerEmail = 'faruktoptas@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
 
 android {
     compileSdkVersion 28
@@ -39,4 +62,9 @@ dependencies {
 }
 repositories {
     mavenCentral()
+}
+
+if (project.rootProject.file('local.properties').exists()) {
+    apply from: 'https://raw.githubusercontent.com/wajahatkarim3/JCenter-Gradle-Scripts/master/install.gradle'
+    apply from: 'https://raw.githubusercontent.com/wajahatkarim3/JCenter-Gradle-Scripts/master/bintray.gradle'
 }
