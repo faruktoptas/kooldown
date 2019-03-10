@@ -11,28 +11,34 @@ class Kooldown @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs, defStyleAttr) {
 
     var strokeWidth = 5f
+        set(value) {
+            paint.strokeWidth = value
+            field = value
+        }
     var duration = 3000L
-    var maxAngle = 360
+    var progress = 360
     var inactiveColor = Color.LTGRAY
     var activeColor = Color.RED
     var startAngle = 0f
     var listener: OnProgressListener? = null
+    var autoStart = false
+    val isAnimationRunning: Boolean
+        get() = startAnimating
 
-    //private var started = false
     private var current = 0.0
     private val paint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         color = activeColor
-        strokeWidth = this@Kooldown.strokeWidth
         style = Paint.Style.STROKE
     }
     private val oval = RectF()
     private var firstDraw = 0L
+    private var pauseTime = 0L
     private val bitmapPaint = Paint()
     private lateinit var bitmap: Bitmap
     private lateinit var bitmapCanvas: Canvas
+    private var startAnimating = false
 
     init {
-        setBackgroundColor(Color.WHITE)
         if (attrs != null) {
             val typedArray = context.theme.obtainStyledAttributes(attrs, R.styleable.Kooldown, 0, 0)
             try {
@@ -45,24 +51,41 @@ class Kooldown @JvmOverloads constructor(
                     Color.RED
                 )
                 strokeWidth = typedArray.getFloat(R.styleable.Kooldown_kd_strokeWidth, 5f)
-                maxAngle = typedArray.getInt(R.styleable.Kooldown_kd_max_angle, 360)
+                progress = typedArray.getInt(R.styleable.Kooldown_kd_progress, 360)
                 duration = typedArray.getInt(R.styleable.Kooldown_kd_duration, 3000).toLong()
                 startAngle = typedArray.getFloat(R.styleable.Kooldown_kd_startAngle, 0f)
+                autoStart = typedArray.getBoolean(R.styleable.Kooldown_kd_autoStart, false)
             } finally {
                 typedArray.recycle()
             }
         }
         paint.strokeWidth = strokeWidth
+        setBackgroundColor(Color.TRANSPARENT)
     }
 
     fun start() {
-        firstDraw = System.currentTimeMillis()
+        startAnimating = true
+        if (pauseTime > 0) {
+            firstDraw = System.currentTimeMillis() - pauseTime
+        } else {
+            current = 0.0
+            firstDraw = System.currentTimeMillis()
+        }
+
         postInvalidate()
     }
 
-    fun stop() {
+    fun reset() {
         current = 0.0
-        firstDraw = 0L
+        startAnimating = false
+        pauseTime = 0
+    }
+
+    fun pause() {
+        if (isAnimationRunning) {
+            startAnimating = false
+            pauseTime = System.currentTimeMillis() - firstDraw
+        }
     }
 
     @SuppressLint("DrawAllocation")
@@ -87,7 +110,10 @@ class Kooldown @JvmOverloads constructor(
 
     private fun drawCircle(canvas: Canvas) {
         if (width > 0 && height > 0) {
-            if (firstDraw == 0L) firstDraw = System.currentTimeMillis()
+            if (firstDraw == 0L) {
+                firstDraw = System.currentTimeMillis()
+                if (autoStart) start()
+            }
             val shortSide = if (width > height) height else width
 
             val centerX = width / 2
@@ -101,14 +127,17 @@ class Kooldown @JvmOverloads constructor(
                 centerY + radius - strokeWidth
             )
 
-            if (current < maxAngle /*&& started*/) {
-                val diff = System.currentTimeMillis() - firstDraw
-                current = ((maxAngle * (diff / duration.toDouble())))
-                postInvalidate()
-            } else /*if (started)*/ {
-                current = maxAngle.toDouble()
-                //started = false
-                listener?.onComplete()
+            if (startAnimating) {
+                if (current < progress) {
+                    val diff = System.currentTimeMillis() - firstDraw
+                    current = ((progress * (diff / duration.toDouble())))
+                    postInvalidate()
+                } else {
+                    current = progress.toDouble()
+                    listener?.onComplete()
+                    startAnimating = false
+                    pauseTime = 0
+                }
             }
             drawArc(canvas, current.toFloat())
 

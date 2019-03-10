@@ -4,8 +4,9 @@
         <attr name="kd_inactiveColor" format="color"/>
         <attr name="kd_activeColor" format="color"/>
         <attr name="kd_strokeWidth" format="float"/>
-        <attr name="kd_max_angle" format="integer"/>
+        <attr name="kd_progress" format="integer"/>
         <attr name="kd_duration" format="integer"/>
         <attr name="kd_startAngle" format="float"/>
+        <attr name="kd_autoStart" format="boolean"/>
     </declare-styleable>
 </resources>
