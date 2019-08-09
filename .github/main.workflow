@@ -5,5 +5,5 @@ workflow "New workflow" {
 
 action "Build" {
   uses = "vgaidarji/android-github-actions/build@v1.0.0"
-  args = "./gradlew assembleDebug"
+  args = "yes | sdkmanager --licenses;./gradlew assembleDebug"
 }
