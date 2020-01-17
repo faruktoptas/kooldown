@@ -10,6 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Build with Gradle
-      uses: vgaidarji/android-github-actions-build@v1.0.1
-      with:
-        args: "./gradlew connectedAndroidTest"
+      uses: vgaidarji/android-github-actions/emulator@v1.0.0
