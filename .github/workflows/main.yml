@@ -9,5 +9,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Build with Gradle
-      uses: vgaidarji/android-github-actions/emulator@v1.0.0
+    - name: Run UI Tests
+      uses: faruktoptas/android-github-actions/emulator@v1.0.0
