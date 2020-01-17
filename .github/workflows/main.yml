@@ -8,4 +8,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: vgaidarji/android-github-actions/emulator@v1.0.0
+    - uses: actions/checkout@v1
+    - name: Build with Gradle
+      uses: vgaidarji/android-github-actions-build@v1.0.1
+      with:
+        args: "./gradlew assembleDebug"
+
