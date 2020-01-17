@@ -10,4 +10,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: Run UI Tests
-      uses: ishubhamsinghtj/android-github-actions/emulator@v1.1.0
+      uses: ishubhamsinghtj/android-github-actions/emulator@latest
