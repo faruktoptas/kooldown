@@ -32,7 +32,7 @@ install:
   - sdkmanager "emulator" "tools" "platform-tools" > /dev/null
   - sdkmanager --list | head -20
   - sdkmanager "build-tools;$BUILD_TOOLS_VERSION" "platforms;android-$28" > /dev/null
-  - sdkmanager "system-images;android-$API;$ABI" > /dev/null
+  - sdkmanager "system-images;android-$API;google_apis;$ABI" > /dev/null
   - sdkmanager --list | head -15
   - mkdir "$ANDROID_HOME/licenses" || true
   - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "$ANDROID_HOME/licenses/android-sdk-license"
