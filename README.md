@@ -31,6 +31,7 @@ Circular progress animation with duration
  * `kd_startAngle`: Start point of animation (Does not effect duration or speed)
  * `kd_progress`: Max angle of animation. Default value is 360 for a complete circle
  * `kd_autoStart`: Automatically starts animation
+ 
 
 ## License
 [Apache License 2.0](https://github.com/faruktoptas/kooldown/blob/master/LICENSE)
